@@ -1,0 +1,141 @@
+<?php
+
+session_start();
+
+  if(isset($_POST["add_friend"])){
+    header("location:friendlist.php");
+  }
+  if(isset($_POST["log_out"])){
+    header("location:hame.php");
+  }
+  $conn = new mysqli('localhost','root','','practical1');
+  $userid= $_SESSION['id'];
+  
+  $limit =5;
+  if(isset($_GET['page'])){
+    $page =$_GET['page'];
+  }else{
+    $page =1;
+  }
+  $start=($page-1)*$limit;
+
+     $sql2 ="SELECT * FROM friend INNER JOIN my_friend on friend.friend_id=my_friend.friend_id LIMIT $start,$limit";
+     $result =mysqli_query($conn,$sql2);
+      $sql5 ="SELECT * FROM my_friend where user_id='$userid'";
+      $count_details=mysqli_query($conn,$sql5);
+      $count =$count_details->num_rows;
+
+     if(isset($_POST["add_friend"])){
+          $friendId =$_POST["name"];
+          $userid= $_SESSION['id'];
+    
+        $sqlupdate ="UPDATE friend SET no_friends='$count' where friend_id='$userid'";
+        mysqli_query($conn,$sqlupdate);
+         echo  $friendId;
+        $sqlinsert ="DELETE FROM `my_friend` where friend_id='$friendId'";
+       mysqli_query($conn,$sqlinsert);
+       header("location:friendlist.php");
+  }
+
+     if(isset($_POST['friend_list'])){
+        header("location:addfriend.php");
+     }
+
+     if(isset($_POST["log_out"])){
+      header("location:home.php");
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+        body{
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .s1{
+            margin-left: 45%;
+        }
+
+        .pre{
+          position: absolute;
+          top: 50%;
+          left: 20%;
+          font-size: 30px;
+        }
+        .next{
+          position: absolute;
+          top: 50%;
+          left: 70%;
+          font-size: 30px;
+        }
+    </style>
+<body>
+
+   <form action="" method="post">
+   <h1>my friend system</h1>
+
+     <div>
+        <h2><?php  echo $_SESSION['name']; ?>'s add friend page</h2>
+        <h2>total number of friends are <?php echo $count; ?></h2>
+    <table class="s1">
+        <th>name</th>
+        <th>want to add</th>
+        
+       
+           <?php 
+           if($result->num_rows>0){
+            while($row=mysqli_fetch_assoc($result)){
+                echo '<tr><td>'.$row['profile_name'].'</td><td>';
+               
+                ?>
+                
+           <button onclick="add('<?php echo $row['friend_id'] ?>')" id="add_name" name="add_friend">romove</button>
+        
+        <?php echo '</td></tr>'; }
+           }?>
+           
+      
+    </table>
+     <input type="text" id="name" name="name" style="position: absolute;top:60%;border:transparent">
+        <button name="friend_list" style="position: absolute;top:50%;left:40%">friend list</button>
+        <button name="log_out" style="position: absolute;top:50%;left:50%">log out</button>
+    </div>
+   </form>
+    <a id="pre" class="pre"  href="#">previous</a>
+    <a id="next" class="next" href="#">next</a>
+   
+</body>
+
+<script>
+    
+
+    function add(username){
+        document.getElementById("name").value =username;
+     // alert(document.getElementById("name").value);
+        
+    }
+
+    let page =<?php echo $page;?>;
+    document.getElementById("pre").onclick= function ADD1() {
+        if(page>1){
+            page--;
+            window.location.href='friendlist.php?page='+page;
+        }
+    }
+    document.getElementById("next").onclick= function ADD1() {
+        
+            page++;
+            window.location.href='friendlist.php?page='+page;
+        
+    }
+    
+</script>
+</html>

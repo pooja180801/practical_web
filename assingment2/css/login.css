@@ -1,0 +1,125 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    overflow-x: hidden;
+
+
+}
+
+
+
+.form_container{
+    background-color: whitesmoke;
+    width: 300px;
+    height: 400px;
+    margin: 20vh auto;
+    border-radius: 8px;
+    padding: 10px 10px 20px;
+    border: 2px solid black;
+
+}
+
+ .container{
+    background-color: whitesmoke;
+    width: 300px;
+    height: 300px;
+    margin: 25vh auto;
+    border-radius: 8px;
+    padding: 10px 10px;
+    border: 2px solid black;
+} 
+
+.userdetails{
+    background-color: whitesmoke;
+    width: 300px;
+    height: 340px;
+    margin: 25vh auto;
+    border-radius: 8px;
+    padding: 10px 10px;
+    border: 2px solid black; 
+}
+
+h2{
+    text-align: center;
+    color: rgba(148,187,233,1);
+}
+
+.input input,#usertype,.input textarea{
+    display: block;
+    border-radius: 5px;
+    width: 90%;
+    margin: 15px auto ;
+    box-sizing: border-box;
+    padding: 8px;
+    font-size: 12px;
+    border:1.5px solid black;
+
+}
+
+.input input:hover{
+    border: 1.5px solid rgba(148,187,233,1) ;
+}
+
+.btn{
+    
+    margin: 10px auto;
+    border-radius: 8px;
+    padding: 5px;
+    cursor: pointer;
+    border:1px solid black;
+    margin-left:120px;
+    text-align:center;
+}
+
+.btn:hover{
+    background-color: rgb(238,174,202);
+    }
+
+
+.login{
+    margin: 5px auto;
+    font-size: 14px;
+    text-align: center;
+    
+}
+
+.login a{
+    color:rgba(148,187,233,1) ;
+    text-decoration: none;
+
+}
+
+.login a:hover{
+    color:rgb(238,174,202) ;
+}
+
+
+
+.message span{
+    color: whitesmoke;
+   
+}
+
+.message{
+    top: auto;
+    right: 20px;
+    width: 300px;
+    height: 50px;
+    border-radius: 8px;
+    background-color: rgb(151, 13, 13);
+    box-sizing: border-box;
+    padding-top: 12px;
+    padding-left: 10px;
+    display: flex;
+   
+    
+}
+
+.message i{
+    margin-left: 30px;
+    padding-top:3px ;
+
+}
+
